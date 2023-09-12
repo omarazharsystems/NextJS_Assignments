@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Header } from "./Header";
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -34,10 +35,7 @@ const PostList = () => {
 
   return (
     <div className="bg-gray-100 p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center ">
-        Omar Azhar's (EMP-ID: 32211) (Assignment 1 of NextJS by Qasim Zaib) -
-        Blog
-      </h1>
+      <Header />
       <form onSubmit={handleSubmit}>
         <input
           required
@@ -70,9 +68,9 @@ const PostList = () => {
             <p className="text-gray-600">{post.content}</p>
           </li>
         ))} */}
-        {posts.map((post) => (
+        {posts.map((post: any) => (
           <li key={post.id} className="bg-white shadow-md rounded-lg p-4 my-4">
-           <Link href={`/posts/${post.slug}`}>
+            <Link href={`/posts/${post.slug}`}>
               <div className="block">
                 <h2 className="text-xl font-semibold">{post.title}</h2>
                 <p className="text-gray-600">{post.content}</p>
