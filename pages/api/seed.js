@@ -21,17 +21,39 @@ async function seed() {
     });
 
     // Create posts
-    await prisma.post.createMany({
+    const post1 = await prisma.post.create({
+      data: {
+        title: 'Post 1',
+        content: 'Content for Post 1',
+        authorId: user1.id,
+      },
+    });
+
+    const post2 = await prisma.post.create({
+      data: {
+        title: 'Post 2',
+        content: 'Content for Post 2',
+        authorId: user2.id,
+      },
+    });
+
+    // Create comments
+    await prisma.comment.createMany({
       data: [
         {
-          title: 'Post 1',
-          content: 'Content for Post 1',
+          content: 'Comment 1 for Post 1',
+          postId: post1.id,
           authorId: user1.id,
         },
         {
-          title: 'Post 2',
-          content: 'Content for Post 2',
+          content: 'Comment 2 for Post 1',
+          postId: post1.id,
           authorId: user2.id,
+        },
+        {
+          content: 'Comment 1 for Post 2',
+          postId: post2.id,
+          authorId: user1.id,
         },
       ],
     });

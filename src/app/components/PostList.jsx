@@ -1,6 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"; // This is a client component 👈🏽
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -33,7 +35,8 @@ const PostList = () => {
   return (
     <div className="bg-gray-100 p-4">
       <h1 className="text-2xl font-bold mb-4 text-center ">
-        Omar Azhar's (EMP-ID: 32211) (Assignment 1 of NextJS by Qasim Zaib) - Blog
+        Omar Azhar's (EMP-ID: 32211) (Assignment 1 of NextJS by Qasim Zaib) -
+        Blog
       </h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -61,10 +64,20 @@ const PostList = () => {
       </form>
       <ul>
         <h3>Posts are displayed here (both statically and Dynamically)</h3>
-        {posts.map((post) => (
+        {/* {posts.map((post) => (
           <li key={post.id} className="bg-white shadow-md rounded-lg p-4 my-4">
             <h2 className="text-xl font-semibold">{post.title}</h2>
             <p className="text-gray-600">{post.content}</p>
+          </li>
+        ))} */}
+        {posts.map((post) => (
+          <li key={post.id} className="bg-white shadow-md rounded-lg p-4 my-4">
+           <Link href={`/posts/${post.slug}`}>
+              <div className="block">
+                <h2 className="text-xl font-semibold">{post.title}</h2>
+                <p className="text-gray-600">{post.content}</p>
+              </div>
+            </Link>
           </li>
         ))}
       </ul>
